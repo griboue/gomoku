@@ -1,15 +1,15 @@
 #pragma once
+#include "Board.h"
 
 class Player
 {
 private:
-	int score;
-
-
+	char symbol;
+	Board board;
 
 public:
+	Player(char symbol, Board board);
 	Player();
-	~Player();
 
-
+	void play(int x, int y);
 };
