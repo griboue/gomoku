@@ -2,8 +2,8 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
-	sf::CircleShape shape(100.f);
+	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!"/*, sf::Style::Fullscreen*/);
+	sf::CircleShape shape(300.f);
 	shape.setFillColor(sf::Color::Green);
 
 	while (window.isOpen())
