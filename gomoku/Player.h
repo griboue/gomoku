@@ -1,5 +1,7 @@
 #pragma once
 #include "Board.h"
+#define BLACK 'X'
+#define WHITE 'O'
 
 class Player
 {
