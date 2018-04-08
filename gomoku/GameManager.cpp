@@ -6,8 +6,8 @@ GameManager::~GameManager() {}
 GameManager::GameManager(int width, int height)
 {
 	this->board = Board(width, height);
-	this->p1 = Player(BLACK, this->board);
-	this->p2 = Player(WHITE, this->board);
+	this->p1 = Player('X', this->board);
+	this->p2 = Player('O', this->board);
 }
 
 Board GameManager:: getBoard()
