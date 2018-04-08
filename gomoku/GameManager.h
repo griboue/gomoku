@@ -1,6 +1,9 @@
 #pragma once
 #include "Board.h"
 #include "Player.h"
+#define EMPTY_CASE 'E'
+#define BLACK 'X'
+#define WHITE 'O'
 
 
 class GameManager
