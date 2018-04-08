@@ -324,6 +324,6 @@ ASALocalRun/
 *.nvuser
 
 
-
+*.sln
 *.vcxproj
 *.filters
