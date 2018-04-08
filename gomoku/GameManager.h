@@ -17,4 +17,6 @@ public:
 	Board getBoard();
 	Player getP1();
 	Player getP2();
+
+	bool isFinish();
 };

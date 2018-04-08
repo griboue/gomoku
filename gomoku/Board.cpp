@@ -60,9 +60,9 @@ void Board::displayBoard()
 	// the bottom left hand corner is (0,0)
 	// the top right hand corner is (4,4)
 
-	for (int i = (width-1); i > -1; i--)
+	for (int i = (height-1); i > -1; i--)
 	{
-		for (int j = 0; j < height; j++)
+		for (int j = 0; j < width; j++)
 		{
 			std::cout << this->board[j][i] << " ";
 		}
