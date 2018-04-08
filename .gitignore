@@ -325,5 +325,5 @@ ASALocalRun/
 
 
 
-*.vcxproj
-*.filters
+#*.vcxproj
+#*.filters
