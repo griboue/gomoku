@@ -23,7 +23,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!"/*, sf::Style::Fullscreen*/);
 	sf::Texture texture;
 
-	if (!texture.loadFromFile("beer.jpg"))
+	if (!texture.loadFromFile("testSprite.jpg"))
 	{
 		cout << "erro loading the sprite";
 	}
