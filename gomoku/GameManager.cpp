@@ -26,32 +26,39 @@ Player GameManager::getP2()
 }
 
 
-bool GameManager::isFinish()
+char GameManager::isOver()
 {
 	char** tab = this->board.getBoard();
 
-	//lignes
-	for (int i = 0; i < this->board.getWidth(); i++)
+	// for the lines
+	for (int i = 0; i < this->board.getHeight(); i++)
 	{
 		if (tab[0][i] == 'X' && tab[1][i] == 'X' && tab[2][i] == 'X' && tab[3][i] == 'X' && tab[4][i] == 'X')
 		{
-			return true;
+			return 'X';
 		}
 	}
 		
+	// for the columns
+	for (int i = 0; i < this->board.getWidth(); i++)
+	{
+		if (tab[i][0] == 'X' && tab[i][1] == 'X' && tab[i][2] == 'X' && tab[i][3] == 'X' && tab[i][4] == 'X')
+		{
+			return 'X';
+		}
+	}
 			
-	/*
-	//columns
-	for (size_t i = 0; i <  this->board.getWidth; i++)
-		if (tab[0][i] == playerSign && tab[1][i] == playerSign && tab[2][i] == playerSign && tab[3][i] == playerSign && tab[4][i] == playerSign)
-			return true;
+	// for the diags
+	if (tab[0][0] == 'X' && tab[1][1] == 'X' && tab[2][2] == 'X' && tab[3][3] == 'X' && tab[4][4] == 'X')
+	{
+		return 'X';
+	}
 
-	//diags
-	if (tab[0][0] == playerSign && tab[1][1] == playerSign && tab[2][2] == playerSign && tab[3][3] == playerSign && tab[4][4] == playerSign)
-		return true;
-	if (tab[4][0] == playerSign && tab[3][1] == playerSign && tab[2][2] == playerSign && tab[1][3] == playerSign && tab[0][4] == playerSign)
-		return true;
-		*/
+	if (tab[4][0] == 'X' && tab[3][1] == 'X' && tab[2][2] == 'X' && tab[1][3] == 'X' && tab[0][4] == 'X')
+	{
+		return 'X';
+	}
+			
 	return false;
 }
 

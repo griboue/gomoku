@@ -11,14 +11,20 @@ int main()
 
 	gm.getP1().play(0, 0);
 	gm.getBoard().displayBoard();
-	gm.getP1().play(1, 0);
+	gm.getP1().play(1, 1);
 	gm.getBoard().displayBoard();
-	gm.getP1().play(2, 0);
+	gm.getP1().play(2, 2);
 	gm.getBoard().displayBoard();
-	gm.getP1().play(3, 0);
+	gm.getP1().play(3, 3);
 	gm.getBoard().displayBoard();
-	gm.getP1().play(4, 0);
+	if (gm.isOver() == 'X') {
+		cout << "game finish";
+	}
+	gm.getP1().play(4, 4);
 	gm.getBoard().displayBoard();
+	if (gm.isOver() == 'X') {
+		cout << "game finish";
+	}
 
 
 
