@@ -11,9 +11,13 @@ int main()
 
 	gm.getP1().play(0, 0);
 	gm.getBoard().displayBoard();
-	gm.getP2().play(4, 0);
+	gm.getP1().play(1, 0);
 	gm.getBoard().displayBoard();
-	gm.getP1().play(4, 4);
+	gm.getP1().play(2, 0);
+	gm.getBoard().displayBoard();
+	gm.getP1().play(3, 0);
+	gm.getBoard().displayBoard();
+	gm.getP1().play(4, 0);
 	gm.getBoard().displayBoard();
 
 
