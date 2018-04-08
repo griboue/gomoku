@@ -4,6 +4,7 @@
 
 int main()
 {
+	// launch a window
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!"/*, sf::Style::Fullscreen*/);
 
 	GameManager gm(5, 5);
