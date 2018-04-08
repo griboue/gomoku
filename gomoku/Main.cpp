@@ -2,6 +2,7 @@
 #include "GameManager.h"
 
 
+using namespace std;
 int main()
 {
 
@@ -17,9 +18,22 @@ int main()
 
 
 
-	/*
+	
 	// launch a window
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!"/*, sf::Style::Fullscreen*/);
+	sf::Texture texture;
+
+	if (!texture.loadFromFile("beer.jpg"))
+	{
+		cout << "erro loading the sprite";
+	}
+
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+
+	
+
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -29,9 +43,10 @@ int main()
 				window.close();
 		}
 		window.clear();
+		window.draw(sprite);
 		window.display();
 	} 
-	*/
+	
 
 	system("pause");
 	return 0;
