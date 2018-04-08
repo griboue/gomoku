@@ -327,3 +327,6 @@ ASALocalRun/
 *.sln
 *.vcxproj
 *.filters
+!*.jpg
+!*.png
+
