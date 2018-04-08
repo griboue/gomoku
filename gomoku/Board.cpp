@@ -64,7 +64,7 @@ void Board::displayBoard()
 	{
 		for (int j = 0; j < height; j++)
 		{
-			std::cout << this->board[j][i] << "(" << j <<  "," << i << ")";
+			std::cout << this->board[j][i] << " ";
 		}
 		std::cout << std::endl;
 	}

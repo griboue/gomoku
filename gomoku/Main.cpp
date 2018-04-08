@@ -4,8 +4,6 @@
 
 int main()
 {
-	// launch a window
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!"/*, sf::Style::Fullscreen*/);
 
 	GameManager gm(5, 5);
 	gm.getBoard().displayBoard();
@@ -18,6 +16,10 @@ int main()
 	gm.getBoard().displayBoard();
 
 
+
+	/*
+	// launch a window
+	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!", sf::Style::Fullscreen);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -26,10 +28,11 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
 		window.clear();
 		window.display();
-	}
+	} 
+	*/
 
+	system("pause");
 	return 0;
 }
