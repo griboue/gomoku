@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Board.h"
 
 class Player
@@ -18,3 +19,4 @@ public:
 	int getLastX();
 	int getLastY();
 };
+
