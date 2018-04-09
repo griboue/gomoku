@@ -48,7 +48,7 @@ void Board::boardFirstInitialization()
 	{
 		for (int j = 0; j < height; j++)
 		{
-			this->board[i][j] = EMPTY_CASE;
+			this->board[i][j] = 'X';
 		}
 	}
 	

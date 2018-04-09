@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Board.h"
 
 class Player
@@ -13,3 +14,4 @@ public:
 
 	void play(int x, int y);
 };
+

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Board.h"
 #include "Player.h"
 #define EMPTY_CASE 'E'
@@ -23,3 +24,4 @@ public:
 
 	char isOver();
 };
+

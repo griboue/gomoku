@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 
 class Board
@@ -23,3 +24,4 @@ public:
 	void displayBoard();
 
 };
+
