@@ -51,7 +51,7 @@ void MouseClick(int &xClicked, int &yClicked, vector<sf::RectangleShape> &cells,
 		}
 		if (xClicked > 4 || yClicked >> 4)
 		{
-			throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
+			//throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
 		}
 }
 
@@ -75,6 +75,7 @@ int main()
 	}
 	const sf::Texture *pCellTexture = &textureCell;
 	const sf::Texture *pCrossedCellTexture = &textureCrossedCell;
+
 	generateCells(cells, size, pCellTexture);
 	
 
