@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 
-	GameManager gm(5, 5);
+	GameManager gm(BOARD_SIZE, BOARD_SIZE);
 	gm.getBoard().displayBoard();
 
 	gm.getP1().play(0, 0);
