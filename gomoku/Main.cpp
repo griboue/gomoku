@@ -3,46 +3,11 @@
 
 
 using namespace std;
-int main()
+
+
+void generateCells(vector<sf::RectangleShape> &cells, int size, const sf::Texture *pTexture)
 {
-	int size = 5;
-	GameManager gm(size, size);
-	gm.getBoard().displayBoard();
-
-	gm.getP1().play(0, 0);
-	gm.getBoard().displayBoard();
-	gm.getP1().play(1, 1);
-	gm.getBoard().displayBoard();
-	gm.getP1().play(2, 2);
-	gm.getBoard().displayBoard();
-	gm.getP1().play(3, 3);
-	gm.getBoard().displayBoard();
-	if (gm.isOver() == 'X') {
-		cout << "game finish";
-	}
-	gm.getP1().play(4, 4);
-	gm.getBoard().displayBoard();
-	if (gm.isOver() == 'X') {
-		cout << "game finish";
-	}
-
-
-
-	
-	// launch a window
-	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!"/*, sf::Style::Fullscreen*/);
-
-	vector<sf::RectangleShape> cells;
 	int y = 5;
-	cout << endl << endl;
-	sf::Texture texture;
-	if (!texture.loadFromFile("cellSprite.jpg"))
-	{
-		cout << "erro loading the sprite";
-	}
-
-	const sf::Texture *pTexture = &texture;
-
 	for (int i = 0; i < size; i++)
 	{
 		int x = 5;
@@ -55,20 +20,67 @@ int main()
 			cells.push_back(rectangle);
 			x += 160;
 		}
-		y += 160
-			;
+		y += 160;
 	}
+}
 
-	cout << cells.size();
+
+void MouseClick(int &xClicked, int &yClicked, vector<sf::RectangleShape> &cells, sf::RenderWindow &window, const sf::Texture *pTexture)
+{
+		sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+		for (size_t i = 0; i < cells.size(); i++)
+		{
+			if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 150
+				&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 150)
+			{
+		
+				cells[i].setTexture(pTexture);
+
+				xClicked = i % 5;
+				if (i < 5)
+					yClicked = 4;
+				else if (i < 10)
+					yClicked = 3;
+				else if (i < 15)
+					yClicked = 2;
+				else if (i < 20)
+					yClicked = 1;
+				else if (i < 25)
+					yClicked = 0;
+			}
+		}
+		if (xClicked > 4 || yClicked >> 4)
+		{
+			throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
+		}
+}
+
+int main()
+{
+	int size = 5;
+	int windowWidth = 800;
+	int windowHeight = 800;
+
+	vector<sf::RectangleShape> cells;
+
+	sf::Texture textureCell;
+	sf::Texture textureCrossedCell;
+	if (!textureCell.loadFromFile("cellSprite.jpg"))
+	{
+		cout << "error loading the sprite";
+	}
+	if (!textureCrossedCell.loadFromFile("crossedCellSprite.jpg"))
+	{
+		cout << "error loading the sprite";
+	}
+	const sf::Texture *pCellTexture = &textureCell;
+	const sf::Texture *pCrossedCellTexture = &textureCrossedCell;
+	generateCells(cells, size, pCellTexture);
 	
-	for (sf::RectangleShape r : cells) {
-		cout << r.getPosition().x;
-		cout << r.getPosition().y;
 
-		cout << "----" << endl;
-	}
-
-
+	// launch a window
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "SFML works!"/*, sf::Style::Fullscreen*/);
+	window.setFramerateLimit(60);
 
 	while (window.isOpen())
 	{
@@ -78,13 +90,22 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		window.clear();
 
+
+		int xClicked = 999;
+		int yClicked = 999;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			MouseClick(xClicked, yClicked, cells, window, pCrossedCellTexture);
+			cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
+		}
+		
+	
+		
+		window.clear();
 		for (sf::RectangleShape r : cells) {
 			window.draw(r);
 		}
-
-
 		window.display();
 	} 
 	
