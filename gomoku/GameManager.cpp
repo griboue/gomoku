@@ -29,10 +29,10 @@ Player GameManager::getP2()
 Player* GameManager::getLastMovedPlayer() {
 	return this->lastMovedPlayer;
 }
-
+/*
 void setLastMovePlayer(Player p) {
 	GameManager::lastMovedPlayer = &p;
-}
+}*/
 
 bool GameManager::isFinish()
 {

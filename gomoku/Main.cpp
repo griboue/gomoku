@@ -27,32 +27,32 @@ void generateCells(vector<sf::RectangleShape> &cells, int size, const sf::Textur
 
 void MouseClick(int &xClicked, int &yClicked, vector<sf::RectangleShape> &cells, sf::RenderWindow &window, const sf::Texture *pTexture)
 {
-		sf::Vector2i localPosition = sf::Mouse::getPosition(window);
-		for (size_t i = 0; i < cells.size(); i++)
+	sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+	for (size_t i = 0; i < cells.size(); i++)
+	{
+		if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 150
+			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 150)
 		{
-			if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 150
-				&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 150)
-			{
-		
-				cells[i].setTexture(pTexture);
 
-				xClicked = i % 5;
-				if (i < 5)
-					yClicked = 4;
-				else if (i < 10)
-					yClicked = 3;
-				else if (i < 15)
-					yClicked = 2;
-				else if (i < 20)
-					yClicked = 1;
-				else if (i < 25)
-					yClicked = 0;
-			}
+			cells[i].setTexture(pTexture);
+
+			xClicked = i % 5;
+			if (i < 5)
+				yClicked = 4;
+			else if (i < 10)
+				yClicked = 3;
+			else if (i < 15)
+				yClicked = 2;
+			else if (i < 20)
+				yClicked = 1;
+			else if (i < 25)
+				yClicked = 0;
 		}
-		if (xClicked > 4 || yClicked >> 4)
-		{
-			//throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
-		}
+	}
+	if (xClicked > 4 || yClicked >> 4)
+	{
+		throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
+	}
 }
 
 int main()
@@ -77,7 +77,7 @@ int main()
 	const sf::Texture *pCrossedCellTexture = &textureCrossedCell;
 
 	generateCells(cells, size, pCellTexture);
-	
+
 
 	// launch a window
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "SFML works!"/*, sf::Style::Fullscreen*/);
@@ -100,16 +100,16 @@ int main()
 			MouseClick(xClicked, yClicked, cells, window, pCrossedCellTexture);
 			cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
 		}
-		
-	
-		
+
+
+
 		window.clear();
 		for (sf::RectangleShape r : cells) {
 			window.draw(r);
 		}
 		window.display();
-	} 
-	
+	}
+
 
 	system("pause");
 	return 0;
