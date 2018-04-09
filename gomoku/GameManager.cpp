@@ -38,8 +38,8 @@ bool GameManager::isFinish()
 {
 	char** tab = this->board.getBoard();
 	int counter = 1;	// counter of the linked stones
-	int x = this->p1.getLastX;
-	int y = this->p1.getLastY;
+	int x = this->p1.getLastX();
+	int y = this->p1.getLastY();
 
 	/* horizontal line stones count */
 	while (y > 0)	// counting backward 
@@ -57,7 +57,7 @@ bool GameManager::isFinish()
 		return true;	//check if there are already 5 stones in a line
 	}
 
-	y = this->p1.getLastY;	// reset the vertical axis 
+	y = this->p1.getLastY();	// reset the vertical axis 
 	while (y < BOARD_SIZE)	// counting forward
 	{
 		y++;
@@ -76,7 +76,7 @@ bool GameManager::isFinish()
 
 	/* vertical line stones count */
 	counter = 1;	// reset the counter
-	y = this->p1.getLastY;	// reset the vertical axis 
+	y = this->p1.getLastY();	// reset the vertical axis 
 	while (x > 0)	// counting upward 
 	{
 		x--;
@@ -92,7 +92,7 @@ bool GameManager::isFinish()
 		return true;
 	}
 
-	x = this->p1.getLastX;	// reset the axis 
+	x = this->p1.getLastX();	// reset the axis 
 	while (x < BOARD_SIZE)	// counting downward
 	{
 		x++;
@@ -111,7 +111,7 @@ bool GameManager::isFinish()
 
 	/* left diagonal lines stones count */
 	counter = 1;	// reset the counter
-	x = this->p1.getLastX;	// reset the axis 
+	x = this->p1.getLastX();	// reset the axis 
 	while (x > 0 && y > 0)	// counting left upper incline 
 	{
 		x--;
@@ -128,8 +128,8 @@ bool GameManager::isFinish()
 		return true;
 	}
 
-	x = this->p1.getLastX;	// reset the axis
-	y = this->p1.getLastY;	// reset the vertical axis
+	x = this->p1.getLastX();	// reset the axis
+	y = this->p1.getLastY();	// reset the vertical axis
 	while (x < BOARD_SIZE && y < BOARD_SIZE)	// counting downward
 	{
 		x++;
@@ -149,8 +149,8 @@ bool GameManager::isFinish()
 	
 	/* right diagonal lines stones count */
 	counter = 1;	// reset the counter
-	x = this->p1.getLastX;	// reset the axis
-	y = this->p1.getLastY;	// reset the vertical axis
+	x = this->p1.getLastX();	// reset the axis
+	y = this->p1.getLastY();	// reset the vertical axis
 	while (y > 0 && x < BOARD_SIZE)	// counting left
 	{
 		x++;
@@ -167,8 +167,8 @@ bool GameManager::isFinish()
 		return true;
 	}
 
-	x = this->p1.getLastX;	// reset the axis
-	y = this->p1.getLastY;	// reset the vertical axis
+	x = this->p1.getLastX();	// reset the axis
+	y = this->p1.getLastY();	// reset the vertical axis
 	while (x > 0 && y < BOARD_SIZE)	// counting right
 	{
 		x--;
