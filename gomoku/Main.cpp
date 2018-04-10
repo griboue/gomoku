@@ -51,15 +51,17 @@ void MouseClick(int &xClicked, int &yClicked, vector<sf::RectangleShape> &cells,
 	}
 	if (xClicked > 4 || yClicked >> 4)
 	{
-		throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
+		//throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
 	}
 }
 
 int main()
 {
-	int size = 5;
 	int windowWidth = 800;
 	int windowHeight = 800;
+
+	/* test variable */
+	GameManager gm = GameManager(BOARD_SIZE, BOARD_SIZE);
 
 	vector<sf::RectangleShape> cells;
 
@@ -76,7 +78,7 @@ int main()
 	const sf::Texture *pCellTexture = &textureCell;
 	const sf::Texture *pCrossedCellTexture = &textureCrossedCell;
 
-	generateCells(cells, size, pCellTexture);
+	generateCells(cells, BOARD_SIZE, pCellTexture);
 
 
 	// launch a window
@@ -98,6 +100,23 @@ int main()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			MouseClick(xClicked, yClicked, cells, window, pCrossedCellTexture);
+
+			/*int x = xClicked, y = yClicked;
+			cout << "x,y: " << "(" << x << "," << y << ")" << endl;
+
+			gm.getP1().play(x, y);
+			cout << "last x,y: " << "(" << gm.getBoard().getLastX() << "," << gm.getBoard().getLastY() << ")" << endl;
+			if (gm.isFinish()) {
+				if (gm.checkWinner() == 1) {
+					cout << "Black stone wins" <<endl;
+				}
+				else if (gm.checkWinner() == 0) {
+					cout << "White stone wins" << endl;
+				}
+				else {
+					cout << "Error" << endl;
+				}
+			}*/
 			cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
 		}
 

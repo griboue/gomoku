@@ -10,6 +10,8 @@ Board::Board (int width, int height)
 {
 	this->width = width;
 	this->height = height;
+	this->lastX = 0;
+	this->lastY = 0;
 
 	// initialize the board 2d array with
 	// correct size and with E (for empty)
@@ -28,7 +30,7 @@ int Board::getHeight()
 	return this->height;
 }
 
-char ** Board::getBoard()
+char** Board::getBoard()
 {
 	return this->board;
 }
@@ -70,4 +72,19 @@ void Board::displayBoard()
 	std::cout << std::endl;
 }
 
+int Board::getLastX() {
+	return this->lastX;
+}
 
+int Board::getLastY() {
+	return this->lastY;
+}
+
+void Board::setLastMovedPos(int x, int y) {
+	this->lastX = x;
+	this->lastY = y;
+}
+
+void Board::setCell(int x, int y, char piece) {
+	this->board[x][y] = piece;
+}
