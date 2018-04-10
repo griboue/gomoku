@@ -17,18 +17,16 @@ private:
 	sf::Texture textureCell;
 	const sf::Texture *pCellTexture;
 
-
 	sf::Texture textureCrossedCell;
 	const sf::Texture *pCrossedCellTexture;
 
 
 public:
-	GraphicManager(std::string name, int size, int width, int height, bool fs);
-
+	GraphicManager(sf::RenderWindow* window, int size, int width, int height);
 	sf::RenderWindow* getWindow();
-
 	void generateCells();
 	void MouseClick(int &width, int &height);
+	void render();
 
 };
 

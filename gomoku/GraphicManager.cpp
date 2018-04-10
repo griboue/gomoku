@@ -2,18 +2,12 @@
 #include <string>
 #include <iostream>
 
-GraphicManager::GraphicManager(std::string name, int size, int width, int height, bool fs)
+GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, int height)
 {
-	if (fs) 
-	{
 
-		this->window = &sf::RenderWindow(sf::VideoMode(width, height), name, sf::Style::Fullscreen);
-	}
-	else 
-	{
-		this->window = &sf::RenderWindow(sf::VideoMode(width, height), name);
-	}
+	this->window = window;
 
+	this->window->setFramerateLimit(60);
 	this->width = width;
 	this->height = height;
 	this->size = size;
@@ -26,9 +20,9 @@ GraphicManager::GraphicManager(std::string name, int size, int width, int height
 	{
 		std::cout << "error loading the sprite";
 	}
-
 	pCellTexture = &textureCell;
 	pCrossedCellTexture = &textureCrossedCell;
+	generateCells();
 	
 }
 
@@ -58,20 +52,19 @@ void GraphicManager::generateCells()
 
 void GraphicManager::MouseClick(int &xClicked, int &yClicked)
 {
-	int width = window->getSize().x;
-	int height = window->getSize().y;
+	int width = this->width;
+	int height = this->height;
 
 
 	// incorrect (must pass window through getPosition function
-	sf::Vector2i localPosition = sf::Mouse::getPosition();
-
+	sf::Vector2i localPosition = sf::Mouse::getPosition(*(this->window));
 	for (size_t i = 0; i < cells.size(); i++)
 	{
 		if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 0.1875*width
 			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 0.1875*height)
 		{
 
-			cells[i].setTexture(pCellTexture);
+			cells[i].setTexture(pCrossedCellTexture);
 
 			xClicked = i % (int)(0.00625 * width);
 			if (i < (int)(0.00625 * height))
@@ -88,7 +81,14 @@ void GraphicManager::MouseClick(int &xClicked, int &yClicked)
 	}
 	if (xClicked > 4 || yClicked >> 4)
 	{
-		throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
+		//throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
+	}
+}
+
+void GraphicManager::render()
+{
+	for (sf::RectangleShape r : cells) {
+		window->draw(r);
 	}
 }
 
