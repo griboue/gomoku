@@ -3,8 +3,8 @@
 GameManager::GameManager(int width, int height)
 {
 	this->board = Board(width, height);
-	this->p1 = Player(BLACK, this->board);
-	this->p2 = Player(WHITE, this->board);
+	this->p1 = Player(BLACK, &(this->board));
+	this->p2 = Player(WHITE, &(this->board));
 }
 
 GameManager::~GameManager() {}
@@ -49,7 +49,7 @@ bool GameManager::isFinish()
 	}
 
 	y = this->board.getLastY();	// reset the vertical axis 
-	while (y < BOARD_SIZE)	// counting forward
+	while (y < BOARD_SIZE-1)	// counting forward
 	{
 		y++;
 		if (tab[x][y] == *piece) {
@@ -84,7 +84,7 @@ bool GameManager::isFinish()
 	}
 
 	x = this->board.getLastX();	// reset the axis 
-	while (x < BOARD_SIZE)	// counting downward
+	while (x < BOARD_SIZE-1)	// counting downward
 	{
 		x++;
 		if (tab[x][y] == *piece) {
@@ -121,7 +121,7 @@ bool GameManager::isFinish()
 
 	x = this->board.getLastX();	// reset the axis
 	y = this->board.getLastY();	// reset the vertical axis
-	while (x < BOARD_SIZE && y < BOARD_SIZE)	// counting downward
+	while (x < BOARD_SIZE-1 && y < BOARD_SIZE-1)	// counting downward
 	{
 		x++;
 		y++;
@@ -142,7 +142,7 @@ bool GameManager::isFinish()
 	counter = 1;	// reset the counter
 	x = this->board.getLastX();	// reset the axis
 	y = this->board.getLastY();	// reset the vertical axis
-	while (y > 0 && x < BOARD_SIZE)	// counting left
+	while (y > 0 && x < BOARD_SIZE-1)	// counting left
 	{
 		x++;
 		y--;
@@ -160,7 +160,7 @@ bool GameManager::isFinish()
 
 	x = this->board.getLastX();	// reset the axis
 	y = this->board.getLastY();	// reset the vertical axis
-	while (x > 0 && y < BOARD_SIZE)	// counting right
+	while (x > 0 && y < BOARD_SIZE-1)	// counting right
 	{
 		x--;
 		y++;

@@ -6,10 +6,8 @@ using namespace std;
 
 int main()
 {
-	GameManager gm(BOARD_SIZE, BOARD_SIZE);
-	gm.getBoard().displayBoard();
-	gm.getP1().play(0, 0);
-	gm.getBoard().displayBoard();
+	GameManager *gm = new GameManager(BOARD_SIZE, BOARD_SIZE);
+
 
 	int size = 5;
 	int windowWidth = 800;
@@ -21,7 +19,6 @@ int main()
 	
 	int xClicked = 999;
 	int yClicked = 999;
-
 	// determine player turn
 	while (window.isOpen())
 	{
@@ -34,12 +31,20 @@ int main()
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
+			grm.MouseClick(xClicked, yClicked, gm->getP1().getSymbol());
+			gm->getP1().play(xClicked, yClicked);
 
-			grm.MouseClick(xClicked, yClicked, WHITE);
-			cout << xClicked;
-			cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
+			if (gm->isFinish()) {
+				if (gm->checkWinner() == 1) {
+					cout << "Black stone wins" << endl;
+				}
+				else if (gm->checkWinner() == 0) {
+					cout << "White stone wins" << endl;
+				}
+				else cout << "Error" << endl;
+			}
 		}
-		
+
 
 		// Check if clicked cell is empty
 
