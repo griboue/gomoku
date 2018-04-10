@@ -4,7 +4,7 @@
 
 GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, int height)
 {
-
+	
 	this->window = window;
 
 	this->window->setFramerateLimit(60);
@@ -20,8 +20,13 @@ GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, in
 	{
 		std::cout << "error loading the sprite";
 	}
+	if (!textureRoundedCell.loadFromFile("roundedCellSprite.jpg"))
+	{
+		std::cout << "error loading the sprite";
+	}
 	pCellTexture = &textureCell;
 	pCrossedCellTexture = &textureCrossedCell;
+	pRoundedCellTexture = &textureRoundedCell;
 	generateCells();
 	
 }
@@ -33,10 +38,10 @@ sf::RenderWindow * GraphicManager::getWindow()
 
 void GraphicManager::generateCells()
 {
-		int y = 0.00625 * height;
+		int y = (int) 0.00625 * height;
 		for (int i = 0; i < size; i++)
 		{
-			int x = 0.00625 * width;
+			int x = (int) 0.00625 * width;
 			for (int j = 0; j < size; j++)
 			{
 				sf::RectangleShape rectangle;
@@ -50,7 +55,7 @@ void GraphicManager::generateCells()
 		}
 }
 
-void GraphicManager::MouseClick(int &xClicked, int &yClicked)
+void GraphicManager::MouseClick(int &xClicked, int &yClicked, char player)
 {
 	int width = this->width;
 	int height = this->height;
@@ -63,8 +68,14 @@ void GraphicManager::MouseClick(int &xClicked, int &yClicked)
 		if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 0.1875*width
 			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 0.1875*height)
 		{
-
-			cells[i].setTexture(pCrossedCellTexture);
+			if (player == 'O')
+			{
+				cells[i].setTexture(pRoundedCellTexture);
+			}
+			else if (player == 'X')
+			{
+				cells[i].setTexture(pCrossedCellTexture);
+			}
 
 			xClicked = i % (int)(0.00625 * width);
 			if (i < (int)(0.00625 * height))
@@ -81,7 +92,6 @@ void GraphicManager::MouseClick(int &xClicked, int &yClicked)
 	}
 	if (xClicked > 4 || yClicked >> 4)
 	{
-		//throw std::invalid_argument("USER CLICKED BETWEEN CELLS");
 	}
 }
 

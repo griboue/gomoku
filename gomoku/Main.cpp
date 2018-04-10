@@ -14,14 +14,15 @@ int main()
 	int size = 5;
 	int windowWidth = 800;
 	int windowHeight = 800;
-	string windowTitle = "Hello world";
-
-	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), windowTitle);
+	
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game");
 	GraphicManager grm(&window, 5, windowWidth, windowHeight);
 
-
+	
 	int xClicked = 999;
 	int yClicked = 999;
+
+	// determine player turn
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -33,13 +34,25 @@ int main()
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			grm.MouseClick(xClicked, yClicked);
+
+			grm.MouseClick(xClicked, yClicked, 'X');
+			cout << xClicked;
 			cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
 		}
+		
+
+		// Check if clicked cell is empty
+
+		// play in the gameManager if the the cell is empty
+
+		// Check if the game is over (throw exception for the moment if it is the case)
+
+		// Change player turn 
 
 		window.clear();
 		grm.render();
 		window.display();
+
 	}
 
 	return 0;
