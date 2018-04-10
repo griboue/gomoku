@@ -12,7 +12,6 @@ private:
 	Board board;
 	Player p1;
 	Player p2;
-	Player* lastMovedPlayer;
 
 public:
 	GameManager(int width, int height);
@@ -21,8 +20,7 @@ public:
 	Board getBoard();
 	Player getP1();
 	Player getP2();
-	Player* getLastMovedPlayer();
 
 	bool isFinish();
-	friend void setLastMovePlayer(Player p);
+	int checkWinner();
 };

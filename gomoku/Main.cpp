@@ -19,7 +19,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), windowTitle);
 	GraphicManager grm(&window, 5, windowWidth, windowHeight);
 
-	
+
 	int xClicked = 999;
 	int yClicked = 999;
 	while (window.isOpen())
@@ -30,7 +30,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-	
+
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			grm.MouseClick(xClicked, yClicked);
