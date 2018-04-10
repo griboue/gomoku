@@ -16,7 +16,7 @@ int main()
 	int windowHeight = 800;
 	
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game");
-	GraphicManager grm(&window, 5, windowWidth, windowHeight);
+	GraphicManager grm(&window, 8, windowWidth, windowHeight);
 
 	
 	int xClicked = 999;
@@ -35,7 +35,7 @@ int main()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 
-			grm.MouseClick(xClicked, yClicked, 'X');
+			grm.MouseClick(xClicked, yClicked, WHITE);
 			cout << xClicked;
 			cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
 		}
