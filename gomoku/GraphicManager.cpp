@@ -1,4 +1,5 @@
 #include "GraphicManager.h"
+#include "GameManager.h"
 #include <string>
 #include <iostream>
 
@@ -38,10 +39,10 @@ sf::RenderWindow * GraphicManager::getWindow()
 
 void GraphicManager::generateCells()
 {
-		int y = (int) 0.00625 * height;
+		int y = (0.00625) * height;
 		for (int i = 0; i < size; i++)
 		{
-			int x = (int) 0.00625 * width;
+			int x =  0.00625 * width;
 			for (int j = 0; j < size; j++)
 			{
 				sf::RectangleShape rectangle;
@@ -68,11 +69,11 @@ void GraphicManager::MouseClick(int &xClicked, int &yClicked, char player)
 		if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 0.1875*width
 			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 0.1875*height)
 		{
-			if (player == 'O')
+			if (player == WHITE)
 			{
 				cells[i].setTexture(pRoundedCellTexture);
 			}
-			else if (player == 'X')
+			else if (player == BLACK)
 			{
 				cells[i].setTexture(pCrossedCellTexture);
 			}
