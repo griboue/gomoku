@@ -4,7 +4,7 @@ Player::Player() {}
 
 Player::~Player() {}
 
-Player::Player(char symbol, Board board)
+Player::Player(char symbol, Board *board)
 {
 	this->symbol = symbol;
 	this->board = board;
@@ -12,8 +12,8 @@ Player::Player(char symbol, Board board)
 
 void Player::play(int x, int y)
 {
-	this->board.setCell(x, y, this->symbol);
-	this->board.setLastMovedPos(x, y);
+	this->board->setCell(x, y, this->symbol);
+	this->board->setLastMovedPos(x, y);
 }
 
 const char Player::getSymbol() {

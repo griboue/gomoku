@@ -6,10 +6,10 @@ using namespace std;
 
 int main()
 {
-	GameManager gm(BOARD_SIZE, BOARD_SIZE);
-	gm.getBoard().displayBoard();
-	gm.getP1().play(0, 0);
-	gm.getBoard().displayBoard();
+	GameManager *gm = new GameManager(BOARD_SIZE, BOARD_SIZE);
+	//gm.getBoard().displayBoard();
+	//gm.getP1().play(0, 0);
+	//gm.getBoard().displayBoard();
 
 	int size = 5;
 	int windowWidth = 800;
@@ -34,7 +34,19 @@ int main()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			grm.MouseClick(xClicked, yClicked);
-			cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
+			gm->getP1().play(xClicked, yClicked);
+
+			if (gm->isFinish()) {
+				if (gm->checkWinner() == 1) {
+					cout << "Black stone wins" << endl;
+				}
+				else if (gm->checkWinner() == 0) {
+					cout << "White stone wins" << endl;
+				}
+				else cout << "Error" << endl;
+			}
+
+			//cout << "position number: " << "(" << xClicked << "," << yClicked << ")" << endl;
 		}
 
 		window.clear();

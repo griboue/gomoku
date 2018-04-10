@@ -7,11 +7,11 @@ class Player
 {
 private:
 	char symbol;
-	Board board;
+	Board *board;
 
 public:
 	Player();
-	Player(char symbol, Board board);
+	Player(char symbol, Board *board);
 	~Player();
 
 	void play(int x, int y);
