@@ -45,30 +45,25 @@ int main()
 				}
 
 				// Check if clicked cell is empty
-				if (gm->getBoard().isEmpty(xClicked, yClicked)) {
-
-					// play in the gameManager if the the cell is empty
-					turn->play(xClicked, yClicked);
-
-					// Check if the game is over (throw exception for the moment if it is the case)
-					if (gm->isFinish()) {
-						if (gm->checkWinner() == 1) {
-							cout << "Black stone wins" << endl;
-						}
-						else if (gm->checkWinner() == 0) {
-							cout << "White stone wins" << endl;
-						}
-						else cout << "Error, there's maybe a draw." << endl;
-					}
-
-					else {	// Else change player turn	
-						turn = turn == gm->getP1() ? gm->getP2() : gm->getP1();
-						//cout << (turn == gm->getP1()) << endl;
-						//cout << (turn == gm->getP2()) << endl;
-					}
+				if (!gm->getBoard().isEmpty(xClicked, yClicked)) {
+					continue;	// if it's empty then redo the loop
 				}
-				else {
-					continue;	// else redo the loop
+
+				// play in the gameManager if the the cell is empty
+				turn->play(xClicked, yClicked);
+
+				// Check if the game is over (throw exception for the moment if it is the case)
+				if (gm->isFinish()) {
+					if (gm->checkWinner() == 1) {
+						cout << "Black stone wins" << endl;
+					}
+					else if (gm->checkWinner() == 0) {
+						cout << "White stone wins" << endl;
+					}
+					else cout << "Error, there's maybe a draw." << endl;
+				}
+				else {	// Else change player turn	
+					turn = turn == gm->getP1() ? gm->getP2() : gm->getP1();
 				}
 			}
 				
