@@ -26,5 +26,6 @@ public:
 	int getLastY();
 	void setLastMovedPos(int x, int y);
 	void setCell(int x, int y, char piece);
+	bool isEmpty(int x, int y);
 };
 

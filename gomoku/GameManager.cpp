@@ -3,8 +3,8 @@
 GameManager::GameManager(int width, int height)
 {
 	this->board = Board(width, height);
-	this->p1 = Player(BLACK, &(this->board));
-	this->p2 = Player(WHITE, &(this->board));
+	this->p1 = new Player(BLACK, &(this->board));
+	this->p2 = new Player(WHITE, &(this->board));
 }
 
 GameManager::~GameManager() {}
@@ -14,12 +14,12 @@ Board GameManager::getBoard()
 	return this->board;
 }
 
-Player GameManager::getP1()
+Player* GameManager::getP1()
 {
 	return this->p1;
 }
 
-Player GameManager::getP2()
+Player* GameManager::getP2()
 {
 	return this->p2;
 }

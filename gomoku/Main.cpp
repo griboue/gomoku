@@ -7,6 +7,8 @@ using namespace std;
 int main()
 {
 	GameManager *gm = new GameManager(BOARD_SIZE, BOARD_SIZE);
+	Player *turn;	// pointer for giving the turn alternatively to the players
+	turn = gm->getP1();
 	//gm.getBoard().displayBoard();
 	//gm.getP1().play(0, 0);
 	//gm.getBoard().displayBoard();
@@ -34,32 +36,43 @@ int main()
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			grm.MouseClick(xClicked, yClicked, gm->getP1().getSymbol());
-			gm->getP1().play(xClicked, yClicked);
+			grm.MouseClick(xClicked, yClicked, turn->getSymbol());
+			if (xClicked >= BOARD_SIZE || xClicked < 0
+				|| yClicked >= BOARD_SIZE || yClicked < 0) {
+				continue;	// if the player clicks out of the board, redo the loop
+			}
 
-			if (gm->isFinish()) {
-				if (gm->checkWinner() == 1) {
-					cout << "Black stone wins" << endl;
+			// Check if clicked cell is empty
+			if (gm->getBoard().isEmpty(xClicked, yClicked)) {
+				
+				// play in the gameManager if the the cell is empty
+				turn->play(xClicked, yClicked);
+
+				// Check if the game is over (throw exception for the moment if it is the case)
+				if (gm->isFinish()) {
+					if (gm->checkWinner() == 1) {
+						cout << "Black stone wins" << endl;
+					}
+					else if (gm->checkWinner() == 0) {
+						cout << "White stone wins" << endl;
+					}
+					else cout << "Error, there's maybe a draw." << endl;
 				}
-				else if (gm->checkWinner() == 0) {
-					cout << "White stone wins" << endl;
+
+				else {	// Else change player turn	
+					turn = turn == gm->getP1() ? gm->getP2() : gm->getP1();
+					//cout << (turn == gm->getP1()) << endl;
+					//cout << (turn == gm->getP2()) << endl;
 				}
-				else cout << "Error" << endl;
+			}
+			else {
+				continue;	// else redo the loop
 			}
 		}
-
-		// Check if clicked cell is empty
-
-		// play in the gameManager if the the cell is empty
-
-		// Check if the game is over (throw exception for the moment if it is the case)
-
-		// Change player turn 
 
 		window.clear();
 		grm.render();
 		window.display();
-
 	}
 
 	return 0;

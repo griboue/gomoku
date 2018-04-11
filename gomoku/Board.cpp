@@ -88,3 +88,8 @@ void Board::setLastMovedPos(int x, int y) {
 void Board::setCell(int x, int y, char piece) {
 	this->board[x][y] = piece;
 }
+
+// fonction to check if the given case coordinate in the board is empty
+bool Board::isEmpty(int x, int y) {
+	return this->board[x][y] == EMPTY_CASE;
+}
