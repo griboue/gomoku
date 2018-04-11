@@ -14,6 +14,10 @@ private:
 	int height;
 	int size;
 
+	sf::RectangleShape startButton;
+	sf::RectangleShape gameLogo;
+	sf::RectangleShape background;
+
 	sf::Texture textureCell;
 	const sf::Texture *pCellTexture;
 
@@ -23,13 +27,25 @@ private:
 	sf::Texture textureRoundedCell;
 	const sf::Texture *pRoundedCellTexture;
 
+	sf::Texture textureStart;
+	const sf::Texture *pStartTexture;
+
+	sf::Texture textureLogo;
+	const sf::Texture *pLogoTexture;
+
+	sf::Texture textureBackground;
+	const sf::Texture *pBackgroundTexture;
+
 
 public:
 	GraphicManager(sf::RenderWindow* window, int size, int width, int height);
 	sf::RenderWindow* getWindow();
 	void generateCells();
-	void MouseClick(int &width, int &height, char player);
-	void render();
+	void mouseClick(int &width, int &height, char player);
+	void menuClick(int &width, int &height, std::string &currentwindow);
+	void renderGame();
+	void renderMenu();
+	void generateMenu();
 
 };
 
