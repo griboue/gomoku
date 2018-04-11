@@ -61,7 +61,6 @@ void GraphicManager::MouseClick(int &xClicked, int &yClicked, char player)
 	int width = this->width;
 	int height = this->height;
 
-
 	// incorrect (must pass window through getPosition function
 	sf::Vector2i localPosition = sf::Mouse::getPosition(*(this->window));
 	for (size_t i = 0; i < cells.size(); i++)
