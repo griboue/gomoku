@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "GameManager.h"
 
 Player::Player() {}
 
@@ -19,7 +20,12 @@ void Player::play(int x, int y)
 const char Player::getSymbol() {
 	return this->symbol;
 }
-/*
-bool operator==(Player &p1, Player &p2) {
-	return p1.getSymbol() == p2.getSymbol() && p1.board == p2.board;
-}*/
+
+bool Player::isRetract() {
+	return this->retract;
+}
+
+void Player::retract() {
+	this->board->setCell(this->board->getLastX(), this->board->getLastY(), EMPTY_CASE);
+	this->retract = true;
+}

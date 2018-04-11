@@ -8,6 +8,7 @@ class Player
 private:
 	char symbol;
 	Board *board;
+	bool retract;
 
 public:
 	Player();
@@ -16,6 +17,7 @@ public:
 
 	void play(int x, int y);
 	const char getSymbol();
-	//friend bool operator==(Player &p1, Player &p2);
+	bool isRetract();
+	void retract();
 };
 
