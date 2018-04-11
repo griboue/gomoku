@@ -49,7 +49,7 @@ bool GameManager::isFinish()
 	}
 
 	y = this->board.getLastY();	// reset the vertical axis 
-	while (y < BOARD_SIZE-1)	// counting forward
+	while (y < this->board.getHeight()-1)	// counting forward
 	{
 		y++;
 		if (tab[x][y] == *piece) {
@@ -84,7 +84,7 @@ bool GameManager::isFinish()
 	}
 
 	x = this->board.getLastX();	// reset the axis 
-	while (x < BOARD_SIZE-1)	// counting downward
+	while (x < this->board.getWidth() - 1)	// counting downward
 	{
 		x++;
 		if (tab[x][y] == *piece) {
@@ -121,7 +121,7 @@ bool GameManager::isFinish()
 
 	x = this->board.getLastX();	// reset the axis
 	y = this->board.getLastY();	// reset the vertical axis
-	while (x < BOARD_SIZE-1 && y < BOARD_SIZE-1)	// counting downward
+	while (x < this->board.getWidth() - 1 && y < this->board.getHeight() - 1)	// counting downward
 	{
 		x++;
 		y++;
@@ -142,7 +142,7 @@ bool GameManager::isFinish()
 	counter = 1;	// reset the counter
 	x = this->board.getLastX();	// reset the axis
 	y = this->board.getLastY();	// reset the vertical axis
-	while (y > 0 && x < BOARD_SIZE-1)	// counting left
+	while (y > 0 && x < this->board.getWidth() - 1)	// counting left
 	{
 		x++;
 		y--;
@@ -160,7 +160,7 @@ bool GameManager::isFinish()
 
 	x = this->board.getLastX();	// reset the axis
 	y = this->board.getLastY();	// reset the vertical axis
-	while (x > 0 && y < BOARD_SIZE-1)	// counting right
+	while (x > 0 && y < this->board.getHeight() - 1)	// counting right
 	{
 		x--;
 		y++;
@@ -202,7 +202,8 @@ bool GameManager::isFinish()
 	return false;
 }
 
-/*	Function to check which color of pieces won,
+/*	
+	Function to check which color of pieces won,
 	return 1 when black piece won, return 0 when 
 	white chess won. Else return -1 as error message
 */

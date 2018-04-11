@@ -37,8 +37,8 @@ int main()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			grm.MouseClick(xClicked, yClicked, turn->getSymbol());
-			if (xClicked >= BOARD_SIZE || xClicked < 0
-				|| yClicked >= BOARD_SIZE || yClicked < 0) {
+			if (xClicked >= gm->getBoard().getWidth() || xClicked < 0
+				|| yClicked >= gm->getBoard().getHeight() || yClicked < 0) {
 				continue;	// if the player clicks out of the board, redo the loop
 			}
 

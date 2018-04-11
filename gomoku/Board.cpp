@@ -16,11 +16,10 @@ Board::Board (int width, int height)
 	// initialize the board 2d array with
 	// correct size and with E (for empty)
 	boardFirstInitialization();
-	
 }
 
 
-int Board::getWidth ()
+int Board::getWidth()
 {
 	return this->width;
 }
