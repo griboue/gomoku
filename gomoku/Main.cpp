@@ -20,7 +20,6 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game");
 	GraphicManager grm(&window, 5, windowWidth, windowHeight);
 
-	
 	int xClicked = 999;
 	int yClicked = 999;
 
