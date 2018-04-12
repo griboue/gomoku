@@ -4,7 +4,7 @@
 #define EMPTY_CASE 'E'
 #define BLACK 'X'
 #define WHITE 'O'
-#define BOARD_SIZE 5
+#define BOARD_SIZE 8
 
 class GameManager
 {

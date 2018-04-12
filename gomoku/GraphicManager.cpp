@@ -55,21 +55,22 @@ sf::RenderWindow * GraphicManager::getWindow()
 
 void GraphicManager::generateCells()
 {
-		int y = (0.00625) * height;
-		for (int i = 0; i < size; i++)
-		{
-			int x =  0.00625 * width;
+	cout << size << endl;
+	float y = (0.03125 / size) * height;
+	for (int i = 0; i < size; i++)
+	{
+		float x = (0.03125 / size) * height;
 			for (int j = 0; j < size; j++)
 			{
 				sf::RectangleShape rectangle;
-				rectangle.setSize(sf::Vector2f(0.1875*width, 0.1875*height));
+				rectangle.setSize(sf::Vector2f(((float)0.9375/size)*width, ((float)0.9375 / size)*height));
 				rectangle.setPosition(x, y);
 				rectangle.setTexture(pCellTexture);
 				cells.push_back(rectangle);
-				x += 0.2*width;
+				x += (((float)1 / size)*height);
 			}
-			y += 0.2*height;
-		}
+			y += (((float)1 / size)*height);
+	}
 }
 
 void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
@@ -80,8 +81,8 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 	for (size_t i = 0; i < cells.size(); i++)
 	{
 		
-		if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 0.1875*width
-			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 0.1875*height
+		if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + cells[i].getLocalBounds().width
+			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + cells[i].getLocalBounds().height
 			&& !(std::find(alreadyCliked.begin(), alreadyCliked.end(), i) != alreadyCliked.end()))
 		{
 			if (player == WHITE)
@@ -94,20 +95,25 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 			}
 			this->alreadyCliked.push_back(i);
 
-	
-			xClicked = i % (int)(0.00625 * width);
-			if (i < (int)(0.00625 * height))
-				yClicked = 4;
-			else if (i < (int)(0.0125 * height))
-				yClicked = 3;
-			else if (i < (int)(0.01875 * height))
-				yClicked = 2;
-			else if (i < (int)(0.025 * height))
-				yClicked = 1;
-			else if (i < (int)(0.03125 * height))
-				yClicked = 0;
+			
+
+			xClicked = i % size;
+			yClicked = i / size;
+
+			// NOT WORKING BELOW ONLY TO REVERSE
+			if (yClicked < (size / 2))
+			{
+				yClicked = yClicked + (size - yClicked);
+			}
+			else if (yClicked >(size / 2))
+			{
+				yClicked = yClicked - (size - yClicked);
+			}
+
+			
 		}
 	}
+	cout << "cliked on " << xClicked << "," << yClicked << endl;
 	if (xClicked > 4 || yClicked >> 4)
 	{
 	}
@@ -126,7 +132,6 @@ void GraphicManager::menuClick(int &xClicked, int &yClicked, std::string &curren
 	{
 		currentWindow = "game";
 	}
-
 }
 
 void GraphicManager::generateMenu()
