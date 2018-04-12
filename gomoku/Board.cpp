@@ -12,6 +12,7 @@ Board::Board (int width, int height)
 	this->height = height;
 	this->lastX = 0;
 	this->lastY = 0;
+	this->chessCounter = 0;
 
 	// initialize the board 2d array with
 	// correct size and with E (for empty)
@@ -27,6 +28,10 @@ int Board::getWidth()
 int Board::getHeight()
 {
 	return this->height;
+}
+
+int Board::getMaxChessNum() {
+	return this->width * this->height;
 }
 
 char** Board::getBoard()
@@ -79,16 +84,35 @@ int Board::getLastY() {
 	return this->lastY;
 }
 
+char Board::getLastChess() {
+	return this->board[this->lastX][this->lastY];
+}
+
 void Board::setLastMovedPos(int x, int y) {
 	this->lastX = x;
 	this->lastY = y;
 }
 
 void Board::setCell(int x, int y, char piece) {
+	
+	// place a chess
+	if (this->board[x][y] == EMPTY_CASE && piece != EMPTY_CASE) {
+		this->chessCounter++;
+	}
+
+	// case when a player do a retraction action
+	else if (this->board[x][y] != EMPTY_CASE && piece == EMPTY_CASE) {
+		this->chessCounter--;
+	}
+
 	this->board[x][y] = piece;
 }
 
 // fonction to check if the given case coordinate in the board is empty
 bool Board::isEmpty(int x, int y) {
 	return this->board[x][y] == EMPTY_CASE;
+}
+
+bool Board::isFull() {
+	return this->chessCounter == this->getMaxChessNum();
 }

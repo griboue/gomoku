@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 
 class Board
@@ -9,6 +8,7 @@ private:
 	 int height;
 	 int lastX;
 	 int lastY;
+	 int chessCounter;
 	 char** board;
 
 public:
@@ -24,8 +24,11 @@ public:
 	void displayBoard();
 	int getLastX();
 	int getLastY();
+	char getLastChess();
+	int getMaxChessNum();
 	void setLastMovedPos(int x, int y);
 	void setCell(int x, int y, char piece);
 	bool isEmpty(int x, int y);
+	bool isFull();
 };
 

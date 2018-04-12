@@ -21,13 +21,12 @@ const char Player::getSymbol() {
 	return this->symbol;
 }
 
-/*
-bool Player::isRetract() {
+
+bool Player::getRetract() {
 	return this->retract;
 }
 
-void Player::retract() {
+void Player::doRetract() {
 	this->board->setCell(this->board->getLastX(), this->board->getLastY(), EMPTY_CASE);
 	this->retract = true;
 }
-*/
