@@ -36,7 +36,7 @@ GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, in
 	{
 		std::cout << "error loading the sprite";
 	}
-	if (!textureBackground.loadFromFile("gomoku_background.jpg"))
+	if (!textureBackground.loadFromFile("gomoku_dark_background.jpg"))
 	{
 		std::cout << "error loading the sprite";
 	}
@@ -95,7 +95,6 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 			this->alreadyCliked.push_back(i);
 
 	
-
 			xClicked = i % (int)(0.00625 * width);
 			if (i < (int)(0.00625 * height))
 				yClicked = 4;
@@ -160,16 +159,19 @@ void GraphicManager::generateMenu()
 
 void GraphicManager::renderGame()
 {
+	
 	generateMenu();
 	window->draw(background);
 	for (sf::RectangleShape r : cells) {
 		window->draw(r);
 	}
+	
 }
 
 
 void GraphicManager::renderMenu()
 {
+
 	window->draw(background);
 	window->draw(startButton);
 	window->draw(gameLogo);

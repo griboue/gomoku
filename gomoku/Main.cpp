@@ -17,7 +17,7 @@ int main()
 	int windowWidth = 800;
 	int windowHeight = 800;
 	
-	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game");
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game", sf::Style::Titlebar | sf::Style::Close);
 	GraphicManager grm(&window, 5, windowWidth, windowHeight);
 
 	
@@ -67,6 +67,7 @@ int main()
 						if (gm->isFinish()) {
 							if (gm->checkWinner() == 1) {
 								cout << "Black stone wins" << endl;
+								
 							}
 							else if (gm->checkWinner() == 0) {
 								cout << "White stone wins" << endl;
