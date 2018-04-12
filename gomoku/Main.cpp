@@ -58,6 +58,14 @@ int main()
 					// play in the gameManager if the the cell is empty
 					turn->play(xClicked, yClicked);
 
+					/*if (!turn->getRetract()) {	// check for retraction
+						cout << "Do you want to retract your action ?(y/n)" << endl;
+						char reponse;
+						cin >> reponse;
+						if (reponse == 'y')
+							turn->doRetract();
+					}*/
+
 					// Check if the game is over (throw exception for the moment if it is the case)
 					if (gm->isDraw()) {
 						cout << "Draw." << endl;
@@ -75,7 +83,8 @@ int main()
 								break;
 						}
 					}
-					else {	// Else change player turn	
+					else {
+						// Change player turn
 						turn = turn == gm->getP1() ? gm->getP2() : gm->getP1();
 					}
 				}

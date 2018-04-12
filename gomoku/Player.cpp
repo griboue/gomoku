@@ -9,6 +9,7 @@ Player::Player(char symbol, Board *board)
 {
 	this->symbol = symbol;
 	this->board = board;
+	this->retract = false;
 }
 
 void Player::play(int x, int y)
