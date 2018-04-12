@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
+
+using namespace std;
 GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, int height)
 {
 	
@@ -12,6 +14,7 @@ GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, in
 	this->width = width;
 	this->height = height;
 	this->size = size;
+
 
 	if (!textureCell.loadFromFile("cellSprite.jpg"))
 	{
@@ -73,12 +76,13 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 {
 	int width = this->width;
 	int height = this->height;
-
 	sf::Vector2i localPosition = sf::Mouse::getPosition(*(this->window));
 	for (size_t i = 0; i < cells.size(); i++)
 	{
+		
 		if (localPosition.x > cells[i].getPosition().x && localPosition.x < cells[i].getPosition().x + 0.1875*width
-			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 0.1875*height)
+			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + 0.1875*height
+			&& !(std::find(alreadyCliked.begin(), alreadyCliked.end(), i) != alreadyCliked.end()))
 		{
 			if (player == WHITE)
 			{
@@ -88,6 +92,9 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 			{
 				cells[i].setTexture(pCrossedCellTexture);
 			}
+			this->alreadyCliked.push_back(i);
+
+	
 
 			xClicked = i % (int)(0.00625 * width);
 			if (i < (int)(0.00625 * height))

@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
+#include <algorithm>
+
 
 
 
@@ -9,6 +11,7 @@ class GraphicManager
 {
 private:
 	std::vector<sf::RectangleShape> cells;
+	std::vector<int> alreadyCliked;
 	sf::RenderWindow* window;
 	int width;
 	int height;

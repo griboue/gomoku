@@ -17,7 +17,7 @@ public:
 
 	void play(int x, int y);
 	const char getSymbol();
-	bool isRetract();
-	void retract();
+	//bool isRetract();
+	//void retract();
 };
 

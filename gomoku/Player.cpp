@@ -21,6 +21,7 @@ const char Player::getSymbol() {
 	return this->symbol;
 }
 
+/*
 bool Player::isRetract() {
 	return this->retract;
 }
@@ -29,3 +30,4 @@ void Player::retract() {
 	this->board->setCell(this->board->getLastX(), this->board->getLastY(), EMPTY_CASE);
 	this->retract = true;
 }
+*/
