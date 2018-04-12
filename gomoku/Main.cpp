@@ -13,12 +13,12 @@ int main()
 	//gm.getP1().play(0, 0);
 	//gm.getBoard().displayBoard();
 
-	int size = 5;
+	int size = BOARD_SIZE;
 	int windowWidth = 800;
 	int windowHeight = 800;
 	
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game", sf::Style::Titlebar | sf::Style::Close);
-	GraphicManager grm(&window, 5, windowWidth, windowHeight);
+	GraphicManager grm(&window, size, windowWidth, windowHeight);
 
 	
 	int xClicked = 999;

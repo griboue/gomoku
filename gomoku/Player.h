@@ -8,7 +8,7 @@ class Player
 private:
 	char symbol;
 	Board *board;
-	bool retract;
+	// retract;
 
 public:
 	Player();
