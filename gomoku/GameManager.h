@@ -22,5 +22,6 @@ public:
 	Player* getP2();
 
 	bool isFinish();
+	bool isDraw();
 	int checkWinner();
 };

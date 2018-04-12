@@ -175,6 +175,7 @@ bool GameManager::isFinish()
 	if (counter >= 5) {
 		return true;
 	}
+
 	/* right diagonal line stones count */
 	
 	/*//lignes
@@ -202,19 +203,22 @@ bool GameManager::isFinish()
 	return false;
 }
 
+/* Situation when the result is a draw */
+bool GameManager::isDraw() {
+
+	// if the board is full, return true
+	if (this->board.isFull() && !this->isFinish()) {
+		return true;
+	}
+
+	return false;
+}
+
 /*	
 	Function to check which color of pieces won,
 	return 1 when black piece won, return 0 when 
 	white chess won. Else return -1 as error message
 */
 int GameManager::checkWinner() {
-	char** board = this->board.getBoard();
-	char piece = board[this->board.getLastX()][this->board.getLastY()];
-	if (piece == BLACK) {
-		return 1;
-	}
-	else if (piece == WHITE) {
-		return 0;
-	}
-	return -1;
+	return this->board.getLastChess() == BLACK ? 1 : 0;
 }

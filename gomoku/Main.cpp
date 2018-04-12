@@ -19,7 +19,6 @@ int main()
 	
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game", sf::Style::Titlebar | sf::Style::Close);
 	GraphicManager grm(&window, 5, windowWidth, windowHeight);
-
 	
 	int xClicked = 999;
 	int yClicked = 999;
@@ -33,12 +32,6 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// If the user close the window
-			if (event.type == sf::Event::Closed)
-			{
-				window.close();
-			}
-
 			if (currentWindow == "menu") // MENU
 			{
 				if (event.mouseButton.button == sf::Mouse::Left && event.type == sf::Event::MouseButtonPressed)
@@ -58,43 +51,40 @@ int main()
 					}
 
 					// Check if clicked cell is empty
-					if (gm->getBoard().isEmpty(xClicked, yClicked)) {
+					if (!gm->getBoard().isEmpty(xClicked, yClicked)) {
+						continue;	// if that happens then redo the loop
+					}
 
-						// play in the gameManager if the the cell is empty
-						turn->play(xClicked, yClicked);
+					// play in the gameManager if the the cell is empty
+					turn->play(xClicked, yClicked);
 
-						// Check if the game is over (throw exception for the moment if it is the case)
-						if (gm->isFinish()) {
-							if (gm->checkWinner() == 1) {
+					// Check if the game is over (throw exception for the moment if it is the case)
+					if (gm->isDraw()) {
+						cout << "Draw." << endl;
+					}
+					else if (gm->isFinish()) {
+						switch (gm->checkWinner()) {
+							case 1:
 								cout << "Black stone wins" << endl;
-								
-							}
-							else if (gm->checkWinner() == 0) {
+								break;
+							case 0:
 								cout << "White stone wins" << endl;
-							}
-							else cout << "Error, there's maybe a draw." << endl;
-						}
-
-						else {	// Else change player turn	
-							turn = turn == gm->getP1() ? gm->getP2() : gm->getP1();
-							//cout << (turn == gm->getP1()) << endl;
-							//cout << (turn == gm->getP2()) << endl;
+								break;
+							default:
+								cout << "Error." << endl;
+								break;
 						}
 					}
-					else {
-						continue;	// else redo the loop
+					else {	// Else change player turn	
+						turn = turn == gm->getP1() ? gm->getP2() : gm->getP1();
 					}
-					
 				}
-
 			}
 		}
 		// Clear and display the window
 		window.clear();
 		currentWindow == "game" ? grm.renderGame() : grm.renderMenu();
 		window.display();
-
-		
 	}
 
 	return 0;
