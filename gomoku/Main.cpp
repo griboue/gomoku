@@ -26,8 +26,28 @@ int main()
 	string currentWindow = "menu";
 	grm.generateCells();
 	grm.generateMenu();
+	bool gameEnded = false;
 	while (window.isOpen())
 	{
+		if (gameEnded)
+		{
+			switch (gm->checkWinner()) {
+			case 1:
+				cout << "Black stone wins" << endl;
+				grm.popup("Game terminated", 400, 300, "Black stone wins");
+				currentWindow = "menu";
+				break;
+			case 0:
+				cout << "White stone wins" << endl;
+				grm.popup("Game terminated", 400, 300, "White stone wins");
+				currentWindow = "menu";
+				break;
+			default:
+				cout << "Error." << endl;
+				break;
+			}
+			gameEnded = false;
+		}
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -75,21 +95,7 @@ int main()
 						cout << "Draw." << endl;
 					}
 					else if (gm->isFinish()) {
-						switch (gm->checkWinner()) {
-							case 1:
-								cout << "Black stone wins" << endl;
-								grm.popup("Game terminated", 400, 300, "Black stone wins");
-								currentWindow = "menu";
-								break;
-							case 0:
-								cout << "White stone wins" << endl;
-								grm.popup("Game terminated", 400, 300, "White stone wins");
-								currentWindow = "menu";
-								break;
-							default:
-								cout << "Error." << endl;
-								break;
-						}
+						gameEnded = true;
 					}
 					else {
 						// Change player turn
