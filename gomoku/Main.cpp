@@ -7,18 +7,15 @@ using namespace std;
 int main()
 {
 	GameManager *gm = new GameManager(BOARD_SIZE, BOARD_SIZE);
-	Player *turn;	// pointer for giving the turn alternatively to the players
+	Player *turn;	
 	turn = gm->getP1();
-	//gm.getBoard().displayBoard();
-	//gm.getP1().play(0, 0);
-	//gm.getBoard().displayBoard();
+
 
 	int size = BOARD_SIZE;
 	int windowWidth = 800;
 	int windowHeight = 800;
 	
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game", sf::Style::Titlebar | sf::Style::Close);
-
 	GraphicManager grm(&window, size, windowWidth, windowHeight);
 
 	
@@ -39,7 +36,6 @@ int main()
 				window.close();
 			}
 				
-
 			if (currentWindow == "menu") // MENU
 			{
 				if (event.mouseButton.button == sf::Mouse::Left && event.type == sf::Event::MouseButtonPressed)
@@ -82,9 +78,13 @@ int main()
 						switch (gm->checkWinner()) {
 							case 1:
 								cout << "Black stone wins" << endl;
+								grm.popup("Game terminated", 400, 300, "Black stone wins");
+								currentWindow = "menu";
 								break;
 							case 0:
 								cout << "White stone wins" << endl;
+								grm.popup("Game terminated", 400, 300, "White stone wins");
+								currentWindow = "menu";
 								break;
 							default:
 								cout << "Error." << endl;

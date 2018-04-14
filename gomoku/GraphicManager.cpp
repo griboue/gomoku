@@ -10,7 +10,7 @@ GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, in
 	
 	this->window = window;
 
-	this->window->setFramerateLimit(60);
+	this->window->setFramerateLimit(10);
 	this->width = width;
 	this->height = height;
 	this->size = size;
@@ -145,15 +145,47 @@ void GraphicManager::generateMenu()
 	this->background = background;
 }
 
+void GraphicManager::popup(std::string title, int width, int height, std::string message)
+{
+	sf::RenderWindow popupWindow(sf::VideoMode(width, height), title, sf::Style::Titlebar | sf::Style::Close);
+	popupWindow.setFramerateLimit(10);
+
+	// Create a text
+	sf::Font font;
+	font.loadFromFile("micross.ttf");
+	sf::Text text(message, font);
+	text.setFillColor(sf::Color::Black);
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	text.setCharacterSize(30);
+	text.setStyle(sf::Text::Bold);
+	text.setPosition(sf::Vector2f(0.5*width - 0.5*text.getLocalBounds().width, 0.5*height - (0.5*text.getLocalBounds().height)));
+
+
+	// run the program as long as the window is open
+	while (popupWindow.isOpen())
+	{
+		sf::Event event;
+		while (popupWindow.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				popupWindow.close();
+			}
+		}
+		popupWindow.clear(sf::Color(255, 255, 255));
+		popupWindow.draw(text);
+		popupWindow.display();
+	}
+
+}
+
 void GraphicManager::renderGame()
 {
-	
 	generateMenu();
 	window->draw(background);
 	for (sf::RectangleShape r : cells) {
 		window->draw(r);
-	}
-	
+	}	
 }
 
 

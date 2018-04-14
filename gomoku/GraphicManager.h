@@ -49,7 +49,7 @@ public:
 	void renderGame();
 	void renderMenu();
 	void generateMenu();
-
+	void popup(std::string title, int width, int height, std::string message);
 };
 
 
