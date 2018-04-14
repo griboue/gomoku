@@ -95,27 +95,10 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 			}
 			this->alreadyCliked.push_back(i);
 
-			
-
 			xClicked = i % size;
 			yClicked = i / size;
-
-			// NOT WORKING BELOW ONLY TO REVERSE
-			if (yClicked < (size / 2))
-			{
-				yClicked = yClicked + (size - yClicked);
-			}
-			else if (yClicked >(size / 2))
-			{
-				yClicked = yClicked - (size - yClicked);
-			}
-
-			
+			yClicked = ((size-1) - yClicked);
 		}
-	}
-	cout << "cliked on " << xClicked << "," << yClicked << endl;
-	if (xClicked > 4 || yClicked >> 4)
-	{
 	}
 }
 
