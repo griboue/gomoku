@@ -13,7 +13,7 @@ int main()
 	int windowWidth = 800;
 	int windowHeight = 800;
 
-	gm->getBoard().displayBoard();
+	gm->getBoard()->displayBoard();
 	
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game", sf::Style::Titlebar | sf::Style::Close);
 	GraphicManager grm(&window, size, windowWidth, windowHeight);
@@ -50,9 +50,9 @@ int main()
 						break;
 					}
 			}
-			gm->getBoard().clear();
+			gm->getBoard()->clear();
 			grm.clearBoard();
-			gm->getBoard().displayBoard();
+			gm->getBoard()->displayBoard();
 			gameEnded = false;
 			currentWindow = "menu";
 		}
@@ -77,22 +77,22 @@ int main()
 				{
 					
 					grm.mouseClick(xClicked, yClicked, turn->getSymbol());
-					if (xClicked >= gm->getBoard().getWidth() || xClicked < 0
-						|| yClicked >= gm->getBoard().getHeight() || yClicked < 0) {
+					if (xClicked >= gm->getBoard()->getWidth() || xClicked < 0
+						|| yClicked >= gm->getBoard()->getHeight() || yClicked < 0) {
 						continue;	// if the player clicks out of the board, redo the loop
 					}
 
 					// Check if clicked cell is empty
-					if (!gm->getBoard().isEmpty(xClicked, yClicked)) {
+					if (!gm->getBoard()->isEmpty(xClicked, yClicked)) {
 						continue;	// if that happens then redo the loop
 					}
 
 					// play in the gameManager if the the cell is empty
 					turn->play(xClicked, yClicked);
-					gm->getBoard().displayBoard();
+					gm->getBoard()->displayBoard();
 
 					// Check if the game is over (throw exception for the moment if it is the case)
-					if (gm->getBoard().isFull() || gm->isFinish()) {
+					if (gm->getBoard()->isFull() || gm->isFinish()) {
 						gameEnded = true;
 					}
 					else {

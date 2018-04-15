@@ -2,14 +2,14 @@
 
 GameManager::GameManager(int width, int height)
 {
-	this->board = Board(width, height);
-	this->p1 = new Player(BLACK, &(this->board));
-	this->p2 = new Player(WHITE, &(this->board));
+	this->board = new Board(width, height);
+	this->p1 = new Player(BLACK, this->board);
+	this->p2 = new Player(WHITE, this->board);
 }
 
 GameManager::~GameManager() {}
 
-Board GameManager::getBoard()
+Board* GameManager::getBoard()
 {
 	return this->board;
 }
@@ -26,9 +26,9 @@ Player* GameManager::getP2()
 
 bool GameManager::isFinish()
 {
-	char** tab = this->board.getBoard();
-	int x = this->board.getLastX();
-	int y = this->board.getLastY();
+	char** tab = this->board->getBoard();
+	int x = this->board->getLastX();
+	int y = this->board->getLastY();
 	int counter = 1;	// counter of the linked stones
 	char* piece = &tab[x][y]; // the last placed piece to be checked
 
@@ -48,8 +48,8 @@ bool GameManager::isFinish()
 		return true;	//check if there are already 5 stones in a line
 	}
 
-	y = this->board.getLastY();	// reset the vertical axis 
-	while (y < this->board.getHeight()-1)	// counting forward
+	y = this->board->getLastY();	// reset the vertical axis 
+	while (y < this->board->getHeight()-1)	// counting forward
 	{
 		y++;
 		if (tab[x][y] == *piece) {
@@ -67,7 +67,7 @@ bool GameManager::isFinish()
 
 	/* vertical line stones count */
 	counter = 1;	// reset the counter
-	y = this->board.getLastY();	// reset the vertical axis 
+	y = this->board->getLastY();	// reset the vertical axis 
 	while (x > 0)	// counting upward 
 	{
 		x--;
@@ -83,8 +83,8 @@ bool GameManager::isFinish()
 		return true;
 	}
 
-	x = this->board.getLastX();	// reset the axis 
-	while (x < this->board.getWidth() - 1)	// counting downward
+	x = this->board->getLastX();	// reset the axis 
+	while (x < this->board->getWidth() - 1)	// counting downward
 	{
 		x++;
 		if (tab[x][y] == *piece) {
@@ -102,7 +102,7 @@ bool GameManager::isFinish()
 
 	/* left diagonal lines stones count */
 	counter = 1;	// reset the counter
-	x = this->board.getLastX();	// reset the axis 
+	x = this->board->getLastX();	// reset the axis 
 	while (x > 0 && y > 0)	// counting left upper incline 
 	{
 		x--;
@@ -119,9 +119,9 @@ bool GameManager::isFinish()
 		return true;
 	}
 
-	x = this->board.getLastX();	// reset the axis
-	y = this->board.getLastY();	// reset the vertical axis
-	while (x < this->board.getWidth() - 1 && y < this->board.getHeight() - 1)	// counting downward
+	x = this->board->getLastX();	// reset the axis
+	y = this->board->getLastY();	// reset the vertical axis
+	while (x < this->board->getWidth() - 1 && y < this->board->getHeight() - 1)	// counting downward
 	{
 		x++;
 		y++;
@@ -140,9 +140,9 @@ bool GameManager::isFinish()
 	
 	/* right diagonal lines stones count */
 	counter = 1;	// reset the counter
-	x = this->board.getLastX();	// reset the axis
-	y = this->board.getLastY();	// reset the vertical axis
-	while (y > 0 && x < this->board.getWidth() - 1)	// counting left
+	x = this->board->getLastX();	// reset the axis
+	y = this->board->getLastY();	// reset the vertical axis
+	while (y > 0 && x < this->board->getWidth() - 1)	// counting left
 	{
 		x++;
 		y--;
@@ -158,9 +158,9 @@ bool GameManager::isFinish()
 		return true;
 	}
 
-	x = this->board.getLastX();	// reset the axis
-	y = this->board.getLastY();	// reset the vertical axis
-	while (x > 0 && y < this->board.getHeight() - 1)	// counting right
+	x = this->board->getLastX();	// reset the axis
+	y = this->board->getLastY();	// reset the vertical axis
+	while (x > 0 && y < this->board->getHeight() - 1)	// counting right
 	{
 		x--;
 		y++;
@@ -179,7 +179,7 @@ bool GameManager::isFinish()
 	/* right diagonal line stones count */
 	
 	/*//lignes
-	for (int i = 0; i < this->board.getWidth(); i++)
+	for (int i = 0; i < this->board->getWidth(); i++)
 	{
 		if (tab[0][i] == 'X' && tab[1][i] == 'X' && tab[2][i] == 'X' && tab[3][i] == 'X' && tab[4][i] == 'X')
 		{
@@ -190,7 +190,7 @@ bool GameManager::isFinish()
 			
 	/*
 	//columns
-	for (size_t i = 0; i <  this->board.getWidth; i++)
+	for (size_t i = 0; i <  this->board->getWidth; i++)
 		if (tab[0][i] == playerSign && tab[1][i] == playerSign && tab[2][i] == playerSign && tab[3][i] == playerSign && tab[4][i] == playerSign)
 			return true;
 
@@ -207,7 +207,7 @@ bool GameManager::isFinish()
 /*bool GameManager::isDraw() {
 
 	// if the board is full, return true
-	if (this->board.isFull() && !this->isFinish()) {
+	if (this->board->isFull() && !this->isFinish()) {
 		return true;
 	}
 
@@ -220,5 +220,5 @@ bool GameManager::isFinish()
 	white chess won. Else return -1 as error message
 */
 int GameManager::checkWinner() {
-	return this->board.getLastChess() == BLACK ? 1 : 0;
+	return this->board->getLastChess() == BLACK ? 1 : 0;
 }
