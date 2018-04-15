@@ -4,9 +4,6 @@
 #include <iostream>
 #include <algorithm>
 
-
-
-
 class GraphicManager
 {
 private:
@@ -50,6 +47,7 @@ public:
 	void renderMenu();
 	void generateMenu();
 	void popup(std::string title, int width, int height, std::string message);
+	void clearBoard();
 };
 
 

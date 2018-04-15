@@ -204,7 +204,7 @@ bool GameManager::isFinish()
 }
 
 /* Situation when the result is a draw */
-bool GameManager::isDraw() {
+/*bool GameManager::isDraw() {
 
 	// if the board is full, return true
 	if (this->board.isFull() && !this->isFinish()) {
@@ -212,7 +212,7 @@ bool GameManager::isDraw() {
 	}
 
 	return false;
-}
+}*/
 
 /*	
 	Function to check which color of pieces won,

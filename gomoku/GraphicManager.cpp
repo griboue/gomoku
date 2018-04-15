@@ -73,7 +73,7 @@ void GraphicManager::generateCells()
 	}
 }
 
-void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
+void GraphicManager::mouseClick(int &xClicked, int &yClicked, char chess)
 {
 	int width = this->width;
 	int height = this->height;
@@ -85,11 +85,11 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + cells[i].getLocalBounds().height
 			&& !(std::find(alreadyCliked.begin(), alreadyCliked.end(), i) != alreadyCliked.end()))
 		{
-			if (player == WHITE)
+			if (chess == WHITE)
 			{
 				cells[i].setTexture(pRoundedCellTexture);
 			}
-			else if (player == BLACK)
+			else if (chess == BLACK)
 			{
 				cells[i].setTexture(pCrossedCellTexture);
 			}
@@ -102,6 +102,13 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 	}
 }
 
+void GraphicManager::clearBoard() {
+	for (size_t i = 0; i < cells.size(); i++) {
+		cells[i].setTexture(pCellTexture);
+		
+	}
+	this->alreadyCliked.clear();
+}
 
 void GraphicManager::menuClick(int &xClicked, int &yClicked, std::string &currentWindow)
 {
@@ -191,7 +198,6 @@ void GraphicManager::renderGame()
 
 void GraphicManager::renderMenu()
 {
-
 	window->draw(background);
 	window->draw(startButton);
 	window->draw(gameLogo);

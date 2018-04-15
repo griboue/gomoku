@@ -9,15 +9,14 @@ int main()
 	GameManager *gm = new GameManager(BOARD_SIZE, BOARD_SIZE);
 	Player *turn;	
 	turn = gm->getP1();
-
-
 	int size = BOARD_SIZE;
 	int windowWidth = 800;
 	int windowHeight = 800;
+
+	gm->getBoard().displayBoard();
 	
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Gomoku Game", sf::Style::Titlebar | sf::Style::Close);
 	GraphicManager grm(&window, size, windowWidth, windowHeight);
-
 	
 	int xClicked = 999;
 	int yClicked = 999;
@@ -31,22 +30,31 @@ int main()
 	{
 		if (gameEnded)
 		{
-			switch (gm->checkWinner()) {
-			case 1:
-				cout << "Black stone wins" << endl;
-				grm.popup("Game terminated", 400, 300, "Black stone wins");
-				currentWindow = "menu";
-				break;
-			case 0:
-				cout << "White stone wins" << endl;
-				grm.popup("Game terminated", 400, 300, "White stone wins");
-				currentWindow = "menu";
-				break;
-			default:
-				cout << "Error." << endl;
-				break;
+			if (!gm->isFinish()) {
+				cout << "It's a draw." << endl;
+				grm.popup("Game terminated", 400, 300, "It's a draw.");
 			}
+			else {
+				switch (gm->checkWinner()) {
+					case 1:
+						cout << "Black stone wins" << endl;
+						grm.popup("Game terminated", 400, 300, "Black stone wins");
+						break;
+					case 0:
+						cout << "White stone wins" << endl;
+						grm.popup("Game terminated", 400, 300, "White stone wins");
+						break;
+					default:
+						cout << "Error." << endl;
+						grm.popup("Game terminated", 400, 300, "Error.");
+						break;
+					}
+			}
+			gm->getBoard().clear();
+			grm.clearBoard();
+			gm->getBoard().displayBoard();
 			gameEnded = false;
+			currentWindow = "menu";
 		}
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -81,20 +89,10 @@ int main()
 
 					// play in the gameManager if the the cell is empty
 					turn->play(xClicked, yClicked);
-
-					/*if (!turn->getRetract()) {	// check for retraction
-						cout << "Do you want to retract your action ?(y/n)" << endl;
-						char reponse;
-						cin >> reponse;
-						if (reponse == 'y')
-							turn->doRetract();
-					}*/
+					gm->getBoard().displayBoard();
 
 					// Check if the game is over (throw exception for the moment if it is the case)
-					if (gm->isDraw()) {
-						cout << "Draw." << endl;
-					}
-					else if (gm->isFinish()) {
+					if (gm->getBoard().isFull() || gm->isFinish()) {
 						gameEnded = true;
 					}
 					else {

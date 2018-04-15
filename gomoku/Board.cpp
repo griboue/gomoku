@@ -10,9 +10,6 @@ Board::Board (int width, int height)
 {
 	this->width = width;
 	this->height = height;
-	this->lastX = 0;
-	this->lastY = 0;
-	this->chessCounter = 0;
 
 	// initialize the board 2d array with
 	// correct size and with E (for empty)
@@ -49,6 +46,11 @@ void Board::boardFirstInitialization()
 	}
 
 	// fill the array with E (for Empty)
+	this->clear();
+}
+
+void Board::clear() {
+	// fill the array with E (for Empty)
 	for (int i = 0; i < width; i++)
 	{
 		for (int j = 0; j < height; j++)
@@ -56,7 +58,8 @@ void Board::boardFirstInitialization()
 			this->board[i][j] = EMPTY_CASE;
 		}
 	}
-	
+	this->resetCounter();
+	this->setLastMovedPos(0, 0);
 }
 
 void Board::displayBoard()
@@ -74,6 +77,8 @@ void Board::displayBoard()
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
+	std::cout << "lastPos : " << this->lastX << ", " << this->lastY << std::endl;
+	std::cout << "Chess count : " << this->chessCounter << std::endl << std::endl;
 }
 
 int Board::getLastX() {
@@ -115,4 +120,8 @@ bool Board::isEmpty(int x, int y) {
 
 bool Board::isFull() {
 	return this->chessCounter == this->getMaxChessNum();
+}
+
+void Board::resetCounter() {
+	this->chessCounter = 0;
 }
