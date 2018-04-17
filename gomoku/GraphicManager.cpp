@@ -9,7 +9,6 @@ GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, in
 {
 	
 	this->window = window;
-
 	this->window->setFramerateLimit(10);
 	this->width = width;
 	this->height = height;
@@ -55,7 +54,10 @@ sf::RenderWindow * GraphicManager::getWindow()
 
 void GraphicManager::generateCells()
 {
-	cout << size << endl;
+	cells = std::vector<sf::RectangleShape>();
+	alreadyCliked = std::vector<int>();
+
+	cout << this->size << endl;
 	float y = (0.03125 / size) * height;
 	for (int i = 0; i < size; i++)
 	{
@@ -73,7 +75,7 @@ void GraphicManager::generateCells()
 	}
 }
 
-void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
+void GraphicManager::mouseClick(int &xClicked, int &yClicked, char chess)
 {
 	int width = this->width;
 	int height = this->height;
@@ -85,11 +87,11 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 			&& localPosition.y > cells[i].getPosition().y && localPosition.y < cells[i].getPosition().y + cells[i].getLocalBounds().height
 			&& !(std::find(alreadyCliked.begin(), alreadyCliked.end(), i) != alreadyCliked.end()))
 		{
-			if (player == WHITE)
+			if (chess == WHITE)
 			{
 				cells[i].setTexture(pRoundedCellTexture);
 			}
-			else if (player == BLACK)
+			else if (chess == BLACK)
 			{
 				cells[i].setTexture(pCrossedCellTexture);
 			}
@@ -102,12 +104,24 @@ void GraphicManager::mouseClick(int &xClicked, int &yClicked, char player)
 	}
 }
 
+void GraphicManager::clearBoard() {
+	for (size_t i = 0; i < cells.size(); i++) {
+		cells[i].setTexture(pCellTexture);
+		
+	}
+	this->alreadyCliked.clear();
+}
 
-void GraphicManager::menuClick(int &xClicked, int &yClicked, std::string &currentWindow)
+void GraphicManager::setSize(int size)
+{
+	this->size = size;
+}
+
+void GraphicManager::menuClick(int &xClicked, int &yClicked, std::string &currentWindow, int &grid_size)
 {
 	int width = this->width;
 	int height = this->height;
-
+	
 	sf::Vector2i localPosition = sf::Mouse::getPosition(*(this->window));
 	
 	if (localPosition.x > startButton.getPosition().x && localPosition.x < startButton.getPosition().x + startButton.getLocalBounds().width
@@ -115,6 +129,32 @@ void GraphicManager::menuClick(int &xClicked, int &yClicked, std::string &curren
 	{
 		currentWindow = "game";
 	}
+
+	if (localPosition.x > t1.getPosition().x && localPosition.x < t1.getPosition().x + t1.getGlobalBounds().width
+		&& localPosition.y > t1.getPosition().y && localPosition.y < t1.getPosition().y + t1.getGlobalBounds().height)
+	{
+		t2.setFillColor(sf::Color::White);
+		t3.setFillColor(sf::Color::White);
+		t1.setFillColor(sf::Color::Blue);
+		grid_size = 9;
+	}
+	if (localPosition.x > t2.getPosition().x && localPosition.x < t2.getPosition().x + t2.getGlobalBounds().width
+		&& localPosition.y > t2.getPosition().y && localPosition.y < t2.getPosition().y + t2.getGlobalBounds().height)
+	{
+		t1.setFillColor(sf::Color::White);
+		t3.setFillColor(sf::Color::White);
+		t2.setFillColor(sf::Color::Blue);
+		grid_size = 15;
+	}
+	if (localPosition.x > t3.getPosition().x && localPosition.x < t3.getPosition().x + t3.getGlobalBounds().width
+		&& localPosition.y > t3.getPosition().y && localPosition.y < t3.getPosition().y + t3.getGlobalBounds().height)
+	{
+		t1.setFillColor(sf::Color::White);
+		t2.setFillColor(sf::Color::White);
+		t3.setFillColor(sf::Color::Blue);
+		grid_size = 19;
+	}
+
 }
 
 void GraphicManager::generateMenu()
@@ -124,6 +164,29 @@ void GraphicManager::generateMenu()
 
 	int y = (0.5) * height;
 	int x = (0.5) * width;
+
+
+	font.loadFromFile("micross.ttf");
+	t1 = sf::Text("9x9", font);
+	t1.setFillColor(sf::Color::Blue);
+	t1.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	t1.setCharacterSize(30);
+	t1.setStyle(sf::Text::Bold);
+	t1.setPosition(sf::Vector2f(0.2*width - 0.5*t1.getLocalBounds().width, 0.7*height - (0.5*t1.getLocalBounds().height)));
+
+	t2 = sf::Text("15x15", font);
+	t2.setFillColor(sf::Color::White);
+	t2.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	t2.setCharacterSize(30);
+	t2.setStyle(sf::Text::Bold);
+	t2.setPosition(sf::Vector2f(0.5*width - 0.5*t2.getLocalBounds().width, 0.7*height - (0.5*t2.getLocalBounds().height)));
+
+	t3 = sf::Text("19x19", font);
+	t3.setFillColor(sf::Color::White);
+	t3.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	t3.setCharacterSize(30);
+	t3.setStyle(sf::Text::Bold);
+	t3.setPosition(sf::Vector2f(0.8*width - 0.5*t3.getLocalBounds().width, 0.7*height - (0.5*t3.getLocalBounds().height)));
 
 	sf::RectangleShape start;
 	start.setSize(sf::Vector2f(125, 50));
@@ -191,10 +254,12 @@ void GraphicManager::renderGame()
 
 void GraphicManager::renderMenu()
 {
-
 	window->draw(background);
 	window->draw(startButton);
 	window->draw(gameLogo);
+	window->draw(t1);
+	window->draw(t2);
+	window->draw(t3);
 }
 
 

@@ -4,9 +4,6 @@
 #include <iostream>
 #include <algorithm>
 
-
-
-
 class GraphicManager
 {
 private:
@@ -20,6 +17,11 @@ private:
 	sf::RectangleShape startButton;
 	sf::RectangleShape gameLogo;
 	sf::RectangleShape background;
+
+	sf::Text t1;
+	sf::Text t2;
+	sf::Text t3;
+	sf::Font font;
 
 	sf::Texture textureCell;
 	const sf::Texture *pCellTexture;
@@ -45,11 +47,13 @@ public:
 	sf::RenderWindow* getWindow();
 	void generateCells();
 	void mouseClick(int &width, int &height, char player);
-	void menuClick(int &width, int &height, std::string &currentwindow);
+	void menuClick(int &width, int &height, std::string &currentwindow, int &grid_size);
 	void renderGame();
 	void renderMenu();
 	void generateMenu();
 	void popup(std::string title, int width, int height, std::string message);
+	void clearBoard();
+	void setSize(int size);
 };
 
 

@@ -9,7 +9,7 @@
 class GameManager
 {
 private:
-	Board board;
+	Board *board;
 	Player *p1;
 	Player *p2;
 
@@ -17,11 +17,11 @@ public:
 	GameManager(int width, int height);
 	~GameManager();
 
-	Board getBoard();
+	Board *getBoard();
 	Player* getP1();
 	Player* getP2();
 
 	bool isFinish();
-	bool isDraw();
+	//bool isDraw();
 	int checkWinner();
 };

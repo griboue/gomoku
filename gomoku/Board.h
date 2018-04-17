@@ -21,6 +21,7 @@ public:
 
 	// Methods
 	void boardFirstInitialization();
+	void clear();
 	void displayBoard();
 	int getLastX();
 	int getLastY();
@@ -30,5 +31,6 @@ public:
 	void setCell(int x, int y, char piece);
 	bool isEmpty(int x, int y);
 	bool isFull();
+	void resetCounter();
 };
 
