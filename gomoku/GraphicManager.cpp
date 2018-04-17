@@ -4,6 +4,7 @@
 #include <iostream>
 
 
+
 using namespace std;
 GraphicManager::GraphicManager(sf::RenderWindow* window, int size, int width, int height)
 {
@@ -124,34 +125,36 @@ void GraphicManager::menuClick(int &xClicked, int &yClicked, std::string &curren
 	
 	sf::Vector2i localPosition = sf::Mouse::getPosition(*(this->window));
 	
+	
 	if (localPosition.x > startButton.getPosition().x && localPosition.x < startButton.getPosition().x + startButton.getLocalBounds().width
-			&& localPosition.y > startButton.getPosition().y && localPosition.y < startButton.getPosition().y + startButton.getLocalBounds().height)
+			&& localPosition.y > startButton.getPosition().y && localPosition.y < startButton.getPosition().y + startButton.getLocalBounds().height )
 	{
 		currentWindow = "game";
 	}
 
+
 	if (localPosition.x > t1.getPosition().x && localPosition.x < t1.getPosition().x + t1.getGlobalBounds().width
-		&& localPosition.y > t1.getPosition().y && localPosition.y < t1.getPosition().y + t1.getGlobalBounds().height)
+		&& localPosition.y > t1.getPosition().y && localPosition.y < (t1.getPosition().y + t1.getGlobalBounds().height))
 	{
 		t2.setFillColor(sf::Color::White);
 		t3.setFillColor(sf::Color::White);
-		t1.setFillColor(sf::Color::Blue);
+		t1.setFillColor(sf::Color::Green);
 		grid_size = 9;
 	}
 	if (localPosition.x > t2.getPosition().x && localPosition.x < t2.getPosition().x + t2.getGlobalBounds().width
-		&& localPosition.y > t2.getPosition().y && localPosition.y < t2.getPosition().y + t2.getGlobalBounds().height)
+		&& localPosition.y > t2.getPosition().y && localPosition.y < (t2.getPosition().y + t2.getGlobalBounds().height))
 	{
 		t1.setFillColor(sf::Color::White);
 		t3.setFillColor(sf::Color::White);
-		t2.setFillColor(sf::Color::Blue);
+		t2.setFillColor(sf::Color::Green);
 		grid_size = 15;
 	}
 	if (localPosition.x > t3.getPosition().x && localPosition.x < t3.getPosition().x + t3.getGlobalBounds().width
-		&& localPosition.y > t3.getPosition().y && localPosition.y < t3.getPosition().y + t3.getGlobalBounds().height)
+		&& localPosition.y > t3.getPosition().y && localPosition.y < (t3.getPosition().y + t3.getGlobalBounds().height))
 	{
 		t1.setFillColor(sf::Color::White);
 		t2.setFillColor(sf::Color::White);
-		t3.setFillColor(sf::Color::Blue);
+		t3.setFillColor(sf::Color::Green);
 		grid_size = 19;
 	}
 
@@ -168,7 +171,7 @@ void GraphicManager::generateMenu()
 
 	font.loadFromFile("micross.ttf");
 	t1 = sf::Text("9x9", font);
-	t1.setFillColor(sf::Color::Blue);
+	t1.setFillColor(sf::Color::Green);
 	t1.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	t1.setCharacterSize(30);
 	t1.setStyle(sf::Text::Bold);

@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "GameManager.h"
 #include "GraphicManager.h"
-#include <Windows.h>
+
 
 using namespace std;
 
